@@ -1,1 +1,1 @@
-# Frontend
+# This is my final year project based on the farming. Here a farmer can sell their crops online on appropriate price to the customer and customer can purchase the same using online payment method. The ttransaction done by the customer side will be visible on the farmer portal.
