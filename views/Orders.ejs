@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Cart</title>
+
+    <style>
+
+body {
+  background:  #edf1f3;
+  min-height: 100vh;
+}
+header {
+            background-color: #143D59;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+
+        header h1 {
+            color: rgb(7, 170, 7);
+            /* font-family: 'Dancing Script', cursive; */
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #danger:hover {
+            color: #ff3535 !important;
+            transition: color 0.3s;
+        }
+#success:hover {
+            color: #7de762c7 !important;
+            transition: color 0.3s;
+        }
+.logo {
+            border-radius: 5px;
+            border-bottom: 2px ridge white;
+            width: 23vw;
+            height: 12vh;
+        }
+  a{
+    font-size: 17px;
+  }
+    </style>
+ 
+</head>
+<body>
+  <header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                        <img class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+                    </div>
+
+                    <div class="col-12 col-sm-9">
+                        <h1>FarmBee</h1>
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Mandi</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6  ">
+                <ul style="margin-top: 2rem;">
+                    <li class="list-inline-item" style="margin-left: 18rem;">
+                        <a id="success" href="/home"
+                            style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+                    </li>
+                    <%if(authenticated.role==="farmer" && authenticated.kyc){%>
+                    <li class="list-inline-item">
+                        <a id="success" href="/farmer/uploadpost"
+                            style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Add crop</a>
+                    </li>
+                    <%}%>
+                    <%if(authenticated.role==="buyer"){%>
+                    <li class="list-inline-item">
+                        <a id="success" href="/buyer/getstore"
+                            style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Mandi</a>
+                    </li>       
+                    <%}%> 
+                    <li class="list-inline-item">
+                        <a id="success" href="#"
+                            style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+                    </li>
+                    <%if(authenticated.role==="farmer" && authenticated.kyc){%>
+                    <li class="list-inline-item">
+                        <a id="success" href="/farmer/getposts"
+                            style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your crops</a>
+                    </li>
+                    <%}%>     
+                    <li class="list-inline-item">
+                        <form action="/<%=authenticated.role%>/logout" method="post"><button id="danger"
+                                style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer;font-size: 17px;">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</header>
+    <div class="px-4 px-lg-0">
+        <div class="container text-white text-center">
+          <%if(result.length<=0){%>
+            <h1 style="text-align: center; margin-top: 15%; font-size: 7rem;">You haven't order anything yet!!</h1>
+            <%} else {%>
+        </div>
+        <div class="pb-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="p-2 px-3 text-uppercase">Crop</div>
+                        </th>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="py-2 text-uppercase">total</div> 
+                        </th>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="py-2 text-uppercase">Order id</div>
+                        </th>
+                        <th scope="col" class="border-0" style="background-color: #f3f3f3;">
+                          <div class="py-2 text-uppercase">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <%result.map(order=>{%>
+                      <tr>
+                        <th scope="row" class="border-0">
+                          <div class="p-2">
+                            <img src="/<%=order.post.image%>" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="ml-3 d-inline-block align-middle">
+                              <h5 class="mb-0"><%=order.post.title%></h5><span class="text-muted font-weight-normal font-italic d-block">category: <%=order.post.category%></span>
+                            </div>
+                          </div>
+                        </th>
+                        <td class="border-0 align-middle"><strong>&#8377;&nbsp;<%=((order.totalPrice)/(order.quantity)).toFixed(2)%>&nbsp;<span style="font-size: 80%;">/ kg</span></strong></td>
+                        <td class="border-0 align-middle"><strong><%=order.quantity%>&nbsp;<%if(order.quantity>1){%>units<%} else{%>unit<%}%></strong></td>
+                        <td class="border-0 align-middle"><strong>&#8377;&nbsp;<%=(order.totalPrice).toFixed(2)%>&nbsp;</strong></td>
+
+                        <td class="border-0 align-middle"><strong>#<%=order.refId%></strong></td>
+                        <td class="border-0 align-middle"><strong><%=(order.orderedAt).toLocaleString()%></strong></td>
+  
+                      </tr>
+                      <%})%>
+                      <%}%>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- End -->  
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+
+
+
+

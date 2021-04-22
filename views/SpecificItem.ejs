@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <!-- <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+  <title><%= title%></title>
+  <style>
+    
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+        
+   
+    }    
+    header
+    {
+        background-color:#143D59 ;
+        margin-bottom:20px;
+        padding-top:5px;
+    }
+    header h1
+    {
+        color: rgb(7, 170, 7);
+        font-family: 'Dancing Script', cursive;
+      
+
+    }
+    h3
+    {
+        font-family: 'Dancing Script', cursive;  
+    }
+    .logo
+    {
+        border-radius: 5px;
+        border-bottom: 2px ridge white;
+        width:23vw;
+        height:12vh;
+    }
+    
+    .btn
+   {
+    /*background-color: rgb(7, 170, 7) !important;*/
+    color:#143D59 !important;
+    margin: 5px;
+   }
+   #success:hover{
+  color: #7de762c7 !important;
+  transition: color 0.3s ;
+  }
+  #danger:hover{
+  color: #ff3535 !important;
+  transition: color 0.3s;
+  }
+
+img
+{
+border-radius: 20px;
+height:250px;
+}
+.img-btn
+{
+    padding-left: 55px;
+    padding-right: 55px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+a{
+  font-size: 16px;
+}
+
+</style>
+</head>
+<body>
+ 
+  <header>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                        <img class="logo" style="max-width:6vw ;" class="img-fluid" src="../../logo.jpeg">
+                    </div>
+
+                    <div class="col-12 col-sm-9">
+                        <h1>FarmBee</h1>
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Mandi</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6  ">
+                <ul style="margin-top: 2rem;">
+                    <li class="list-inline-item" style="margin-left: 11rem;">
+                      <a id="success" href="/home" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a id="success" href="/<%=authenticated.role%>/getstore" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Mandi</a>
+                    </li>
+                    <%if(authenticated.role==="farmer"){%>
+                    <li class="list-inline-item">
+                        <a id="success" href="/farmer/uploadpost" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Add crop</a>
+                      </li>
+                      <%} else{%>
+                        <li class="list-inline-item">
+                          <a id="success" href="/buyer/orders" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your orders</a>
+                        </li>
+                        <%}%>
+                    <li class="list-inline-item">
+                      <a id="success" href="#" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+                    </li>
+                    <%if(authenticated.role==="farmer"){%>
+                    <li class="list-inline-item">
+                      <a id="success" href="/farmer/getposts" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your crops</a>
+                    </li>
+                    <%}%>
+                    <li class="list-inline-item">
+                      <form action="/<%=authenticated.role%>/logout" method="post"><button id="danger" style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer; font-size: 16px;">Logout</button></form>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+</header>
+<div class="container-fluid ">
+<div class="row">
+<div class="col-12 col-md-6">
+<img src="/<%=result.image%>" class="img-fluid" width="550" height="350">
+<div class="row mt-5 ml-5">
+<a href="/<%=authenticated.role%>/getstore" class="img-btn btn bg-success" style="margin-left: 2rem; padding-left:8rem; padding-right: 8rem; color: #ffffff !important;">Back to Mandi</a>
+</div>
+</div>
+<div class="col-12 col-md-6">
+<p style="font-size: large;"><h2 style="text-transform:uppercase;"><%=result.title%></h2></p>
+<p style="font-size: large;"><h4 style="color: rgb(88, 85, 85);"><%=result.category%></h4></p>
+<hr>
+<p style="font-size: large;"> <i class="fa fa-inr" aria-hidden="true"></i> <b>&#8377;<%=result.price%>/kg</b>  
+ <i style="color:grey; margin-left: 20px; font-size: 15px;" class="fa fa-info-circle" aria-hidden="true"></i> <span style="color:red; font: 7px;"> Hurry only some left !</span>
+</p>
+<p style="color:green;">Special price</p>
+<h3><span style="padding-left: 20px; padding-right:20px;" class="badge badge-success ">New</span></h3>
+<hr>
+<u style="color: #12649b;"><p><b>Seller's Information</b></p></u>
+<br/>
+<p><i class="fa fa-tag" style="color:green; font-size: 17px;" aria-hidden="true"></i><b>Seller's name&nbsp;</b><span style="color:grey">&#8211;&nbsp;<%=result.userId.username%></span></p>
+<p><i class="fa fa-tag" style="color:green; font-size: 17px;" aria-hidden="true"></i><b>Seller's email&nbsp;</b>
+  <span style="color: grey">&#8211;&nbsp;<%=result.userId.email%></span></p>
+<p><i class="fa fa-tag" style="color:green; font-size: 17px;" aria-hidden="true"></i><b>Seller's address&nbsp;</b>
+  <span style="color: grey">&#8211;&nbsp;<%=result.userId.address%></span></p>
+  <p><i class="fa fa-tag" style="color:green; font-size: 17px;" aria-hidden="true"></i><b>Uploaded on&nbsp;</b>
+    <span style="color:grey">&#8211;&nbsp;<%=(result.createdAt).toLocaleString()%></span></p>
+</div>
+</div>
+</div>
+
+
+      
+<!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+<script src="../jquery/dist/jquery.slim.min.js"></script>
+<script src="../popper.js/dist/umd/popper.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

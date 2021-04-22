@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Landing Page</title>
+
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet"> -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+
+
+  
+  <style>
+
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  z-index: -1;
+}
+header
+{
+  background-color:#143D59;
+}
+ header h1
+    {
+      color: rgb(105, 219, 105);
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .logo
+    {
+      border-radius: 5px;
+        border-bottom: 2px ridge white;
+        width:23vw;
+        height:12vh;
+        margin-top: 1rem;
+    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+header.masthead {
+  position: relative;
+  background: url("../farmerpic.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+header.masthead .overlay {
+  position: absolute;
+  padding-top: 8rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.60),rgba(0, 0, 0, 0.60));
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#success:hover{
+  color: #7de762c7 !important;
+  transition: color 0.6s;
+}
+
+#danger:hover{
+  color: #ff3535 !important;
+  transition: color 0.6s;
+}
+
+header.masthead h1 {
+  font-size: 2rem;
+}
+
+.checked{
+font-size: 8px;
+text-transform: lowercase;
+font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1 {
+    font-size: 3rem;
+  }
+}
+
+.showcase .showcase-text {
+  padding: 3rem;
+}
+
+.showcase .showcase-img {
+  min-height: 30rem;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .showcase .showcase-text {
+    padding: 7rem;
+  }
+}
+a{
+  font-size: 17px;
+}
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+span{
+  text-transform: uppercase;
+}
+
+  </style>
+</head>
+<body>
+    <header>
+        <div class="container-fluid">
+          <div class="row" >
+            <div class="col-12 col-sm-6">
+              <div class="row">
+                  <div class="col-12 col-sm-3" >
+                      <img  class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+                  </div>
+                  
+                      <div class="col-12 col-sm-9">
+                          <h1 style="margin-top: 0;">FarmBee</h1>
+                          <div class="row">
+                              <div class="col-12">
+                                  <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Welcome to our portal</h2>
+                              </div>
+                          </div>
+                      </div>
+              </div>
+          </div>
+            <ul class="list-inline mb-2" style="margin-top: 2rem;">
+              <li class="list-inline-item">
+                <%if(!authenticated){%>
+                <div class="dropdown">
+                  <a id="success" style="color:#e9e5e5; text-decoration: none; margin-left: 25rem;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Signup
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a id="success" class="dropdown-item" href="/farmer/signup">Farmer</a>
+                    <a id="success" class="dropdown-item" href="/buyer/signup">Buyer</a>
+                  </div>
+                </div>
+                <%}%>
+              </li>
+              <li class="list-inline-item">
+                <%if(!authenticated){%>
+                <div class="dropdown">
+                  <a id="success" style="color:#e9e5e5;text-decoration: none; margin-left: 42px;" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Login
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a id="success" class="dropdown-item" href="/farmer/signin">Farmer</a>
+                    <a id="success" class="dropdown-item" href="/buyer/signin">Buyer</a>
+                  </div>
+                </div>
+                <%}%>
+              </li>
+              <%if(authenticated && authenticated.role==="farmer"){%>
+                <%if(authenticated.kyc){%>
+              <li class="list-inline-item">
+                <a id="success" href="/farmer/getposts" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your crops</a>
+              </li>
+              <li class="list-inline-item">
+                <a id="success" href="/farmer/paymenthistory" style="color:#e9e5e5; text-decoration: none">Transactions</a>
+              </li>
+              <%}else {%>
+                <li class="list-inline-item">
+                  <a id="success" href="/farmer/kyc" style="color:#e9e5e5; text-decoration: none">Complete&nbsp;&nbsp;your&nbsp;&nbsp;KYC</a>
+                </li>
+                <%}%>
+              <li class="list-inline-item" style="margin-left: 1rem;">
+                <a id="success" href="/farmer/getstore" style="color:#e9e5e5; text-decoration: none;">Mandi</a>
+              </li>
+              <li class="list-inline-item" style="margin-left: 1rem;">
+                <form action="/farmer/logout" method="post"><button id="danger" style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0;">Logout</button></form>
+              </li>
+                <%}%>
+                <%if(authenticated && authenticated.role==="buyer"){%>
+
+                  <li class="list-inline-item" style="margin-left: 8rem;">
+                    <a id="success" href="/buyer/getstore" style="color:#e9e5e5; text-decoration: none;">Mandi</a>
+                  </li>
+                  <li class="list-inline-item" style="margin-left: 2rem;">
+                    <a id="success" href="/buyer/orders" style="color:#e9e5e5; text-decoration: none;">Your orders</a>
+                  </li>
+                  <li class="list-inline-item" style="margin-left: 2rem;">
+                    <form action="/buyer/logout" method="post"><button id="danger" style="color:#e9e5e5;text-decoration: none;background: none; border: none; padding: 0; outline: 0;">Logout</button></form>
+                  </li>
+                <%}%>
+              </li>
+              <li class="list-inline-item"style="margin-left: 1rem;">
+                <%if(authenticated){%>
+                  <p style="color: rgb(109, 207, 109);">Welcome&nbsp;&nbsp;<span class="username"><b><%=authenticated.username%></b><%if(authenticated.role==='farmer' && authenticated.kyc){%> <span style="position: relative; top: -8px; margin-left: 1px"class="badge badge-pill badge-success checked">verified&nbsp;&#10004;</span>
+                  </span><%}%></p>
+                <%}%>
+              </li>
+            </ul>
+          </div>
+          </header>
+
+ 
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5" style="color:white;">Market your business  with farmbee and save your time and effort </h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+              
+              </div>
+              <div class="col-12 col-md-3">
+                
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+ 
+  <!-- Image Showcases -->
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../Register.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 style="color:brown">Register to Farmbee</h2>
+          <p class="lead mb-0">Set your username, Email, Password and you are ready to go. Now login to farmbee!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 text-white showcase-img" style="background-image: url('../buy.jpeg');"></div>
+        <div class="col-lg-6 my-auto showcase-text">
+          <h2 style="color:crimson">Choose product from mandi</h2>
+          <p class="lead mb-0">Farmbee provides fresh product with proper packeging and safety, you select best farmer product!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../sliderfour.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 style="color:darkgreen">Add Product in store</h2>
+          <p class="lead mb-0">Farmers are welcome to add their products in our store and can also set price and other factor!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+
+        <div class="col-lg-6 order-lg-1 text-white showcase-img" style="background-image: url('../chart.jpg');"></div>
+        <div class="col-lg-6 order-lg-2 my-auto showcase-text">
+          <h2 style="color:darkmagenta;">Chart Analysis</h2>
+          <p class="lead mb-0">Analyze the chart and choose best option to sell product!</p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../rwnt.jpg');"></div>
+        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <h2 style="color:darkorange;">Rent land, vehicle</h2>
+          <p class="lead mb-0">Farmers can rent land and needed available vehicle for farming!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/AutoTyping.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!---<span style="position: relative; top: -9px; margin-left: 5px;"class="badge badge-pill badge-success checked">verified</span>->

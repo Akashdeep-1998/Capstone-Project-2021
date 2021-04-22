@@ -1,0 +1,96 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+/* whole form css*/
+form {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+html {
+  font-size: 10px;
+}
+
+/* image section css*/
+#section {
+  width: 50vw;
+  height: 100vh;
+  background-image: url("agriculture-farming.jpg");
+  background-size: 100% 100%;
+  position: relative;
+}
+#section #heading p,
+h2 {
+  text-align: center;
+  font-size: 3rem;
+}
+#section #heading p {
+  color: white;
+}
+#section #heading h2 {
+  color: green;
+}
+#section #heading {
+  background-color: black;
+  opacity: 0.7;
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  right: 5%;
+  font-family: "Hanalei", cursive;
+  font-size: 3rem;
+  padding: 2rem;
+}
+
+/* form css*/
+#formSection {
+  width: 50vw;
+  height: 100vh;
+  padding: 2rem;
+  font-size: 2rem;
+  position: relative;
+}
+table {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+.label {
+  font-size: 2.5rem;
+  padding: 2rem;
+  color: Black;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.textbox {
+  border-width: 0;
+  padding: 1rem;
+  border-color: green;
+}
+.textbox:hover {
+  border-bottom-width: 2px;
+}
+#registerHeading,
+#loginHeading {
+  text-align: center;
+  font-size: 3rem;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.button {
+  text-align: center;
+  padding: 1rem;
+  width: 20vh;
+  background-color: green;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-left: 25%;
+}
+
+/* media query*/
+@media all and (max-width: 950px) {
+  form {
+    flex: 100%;
+  }
+}

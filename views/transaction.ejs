@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <title>Transaction</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+header {
+            background-color: #143D59;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+
+        header h1 {
+            color: rgb(7, 170, 7);
+            /* font-family: 'Dancing Script', cursive; */
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h3 {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .logo {
+            border-radius: 5px;
+            border-bottom: 2px ridge white;
+            width: 23vw;
+            height: 12vh;
+        }
+        img {
+            border-radius: 20px;
+            height: 250px;
+        }
+
+        .title {
+            font-size: 18px;
+        }
+
+        .category,
+        .price,
+        .quantity {
+            font-size: 15px;
+        }
+        #success:hover{
+  color: #7de762c7 !important;
+  transition: color 0.3s ;
+  }
+  #danger:hover{
+  color: #ff3535 !important;
+  transition: color 0.3s;
+  }
+  a{
+      font-size: 16px;
+  }
+body {
+    background-color: rgba(255, 255, 255, 0.459);
+    font-family: 'Poppins', sans-serif
+}
+
+.wrapper {
+    background-color: #222;
+    min-height: 100px;
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 10px 30px
+}
+
+.dark,
+.input:focus {
+    background-color: #222
+}
+
+.navbar {
+    padding: 0.5rem 0rem
+}
+
+.navbar .navbar-brand {
+    font-size: 30px
+}
+
+#income {
+    border-right: 1px solid #bbb
+}
+
+.nav-item .nav-link .fa-bell-o,
+.fa-long-arrow-down,
+.fa-long-arrow-up {
+    padding: 10px 10px;
+    background-color: #444;
+    border-radius: 50%;
+    position: relative;
+    font-size: 18px
+}
+
+.nav-item .nav-link .fa-bell-o::after {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #ffc0cb;
+    right: 10px;
+    top: 10px
+}
+
+.nav-item input {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 3px 8px;
+    width: 75%;
+    color: #eee
+}
+
+.nav-item .fa-search {
+    font-size: 18px;
+    color: #bbb;
+    cursor: pointer
+}
+
+.navbar-nav:last-child {
+    display: flex;
+    align-items: center;
+    width: 40%
+}
+
+.navbar-nav .nav-item {
+    padding: 0px 0px 0px 10px
+}
+
+.navbar-brand p {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 3px
+}
+
+.text {
+    color: #bbb
+}
+
+.money {
+    font-family: 'Lato', sans-serif
+}
+
+.fa-long-arrow-down,
+.fa-long-arrow-up {
+    padding-left: 12px;
+    padding-top: 8px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 100;
+    color: #28df99
+}
+
+.fa-long-arrow-up {
+    color: #ffa500
+}
+
+.nav.nav-tabs {
+    border: none
+}
+
+.nav.nav-tabs .nav-item .nav-link {
+    color: #bbb;
+    border: none
+}
+
+.nav.nav-tabs .nav-link.active {
+    background-color: #222;
+    border: none;
+    color: #fff;
+    border-bottom: 4px solid #fff
+}
+
+.nav.nav-tabs .nav-item .nav-link:hover {
+    border: none;
+    color: #eee
+}
+
+.nav.nav-tabs .nav-item .nav-link.active:hover {
+    border-bottom: 4px solid #fff
+}
+
+.nav.nav-tabs .nav-item .nav-link:focus {
+    border-bottom: 4px solid #fff;
+    color: #fff
+}
+
+.table-dark {
+    background-color: #222
+}
+
+.table thead th {
+    text-transform: uppercase;
+    color: #bbb;
+    font-size: 12px
+}
+
+.table thead th,
+.table td,
+.table th {
+    border: none;
+    overflow: auto auto
+}
+
+td .fa-briefcase,
+td .fa-bed,
+td .fa-exchange,
+td .fa-cutlery {
+    color: #ff6347;
+    background-color: #444;
+    padding: 5px;
+    border-radius: 50%
+}
+
+td .fa-bed,
+td .fa-cutlery {
+    color: #40a8c4
+}
+
+td .fa-exchange {
+    color: #b15ac7
+}
+
+tbody tr td .fa-cc-mastercard,
+tbody tr td .fa-cc-visa {
+    color: #bbb
+}
+
+tbody tr td.text-muted {
+    font-family: 'Lato', sans-serif
+}
+
+tbody tr td .fa-long-arrow-up,
+tbody tr td .fa-long-arrow-down {
+    font-size: 12px;
+    padding-left: 7px;
+    padding-top: 3px;
+    height: 20px;
+    width: 20px
+}
+
+.results span {
+    color: #bbb;
+    font-size: 12px
+}
+
+.results span b {
+    font-family: 'Lato', sans-serif
+}
+
+.pagination .page-item .page-link {
+    background-color: #444;
+    color: #fff;
+    padding: 0.3rem .75rem;
+    border: none;
+    border-radius: 0
+}
+
+.pagination .page-item .page-link span {
+    font-size: 16px
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #333;
+    color: #eee;
+    cursor: crosshair
+}
+
+@media(min-width:768px) and (max-width: 991px) {
+    .wrapper {
+        margin: auto
+    }
+
+    .navbar-nav:last-child {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        width: 100%
+    }
+
+    .notify {
+        display: inline
+    }
+
+    .nav-item .fa-search {
+        padding-left: 10px
+    }
+
+    .navbar-nav .nav-item {
+        padding: 0px
+    }
+}
+
+@media(min-width: 300px) and (max-width: 767px) {
+    .wrapper {
+        margin: auto
+    }
+
+    .navbar-nav:last-child {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        width: 100%
+    }
+
+    .notify {
+        display: inline
+    }
+
+    .nav-item .fa-search {
+        padding-left: 10px
+    }
+
+    .navbar-nav .nav-item {
+        padding: 0px
+    }
+
+    #income {
+        border: none
+    }
+}
+
+@media(max-width: 400px) {
+    .wrapper {
+        padding: 10px 15px;
+        margin: auto
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 10px
+    }
+
+    .nav.nav-tabs .nav-link {
+        padding: 10px
+    }
+}
+</style>
+<body>
+    <header>
+        <div class="container-fluid">
+          
+          <div class="row" >
+            <div class="col-12 col-sm-6">
+              <div class="row">
+                  <div class="col-12 col-sm-3" >
+                      <img  class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+                  </div>
+                  
+                      <div class="col-12 col-sm-9" >
+                          <h1>FarmBee</h1>
+                          <div class="row">
+                              <div class="col-12">
+                                  <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Your transactions</h2>
+                              </div>
+                          </div>
+                      </div>
+              </div>
+          </div>
+              <div class="col-12 col-sm-6">
+                <ul style="margin-top: 2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 17px;">
+                  <li class="list-inline-item" style="margin-left: 15rem;">
+                    <a id="success" href="/home" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a id="success" href="/farmer/uploadpost" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Add Crop</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a id="success" href="#" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a id="success" href="/farmer/getstore" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Mandi</a>
+                  </li>
+                  <li class="list-inline-item">
+                    <form action="/farmer/logout" method="post"><button id="danger" style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer;">Logout</button></form>
+                  </li>
+                </ul>
+            </div>
+            </div>
+          </div>
+          </header>
+    <%if(result.length<=0){%>
+        <div>
+            <h1 class="my-5 text-light" style="margin-left: 25%;">
+                You don't have any transactions yet!!
+            </h1>
+        </div>
+    <%}else{%>
+    <div class="wrapper rounded my-5">
+        <nav class="navbar navbar-expand-lg navbar-dark dark d-lg-flex align-items-lg-start" style="margin-left: 37%;"> <a class="navbar-brand">Transactions <p class="text-muted pl-1">Welcome to your transactions</p> </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                </ul>
+            </div>
+        </nav>
+        <div class="row mt-2 pt-2">
+            <div class="col-md-6" id="income">
+                <div class="d-flex justify-content-start align-items-center">
+                    <p class="fa fa-long-arrow-down"></p>
+                    <p class="text mx-3">Income</p>
+                    <p class="text-white ml-4 money">&#8377;&nbsp;<%=total%></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-md-end align-items-center">
+                    <div class="fa fa-user text-light fa-lg" aria-hidden="true"></div>
+                    <div class="text mx-3 text-uppercase"><%=user.username%></div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <ul class="nav nav-tabs w-75">
+                <li class="nav-item"> <a class="nav-link active">History</a></li>
+            </ul><a href="/home"><button class="btn btn-primary">Go to Home</button></a>
+        </div>
+        <div class="table-responsive mt-3">
+            <table class="table table-dark table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Activity</th>
+                        <th scope="col">Mode</th>
+                        <th scope="col">Date & time</th>
+                        <th scope="col" class="text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%result.map(post=>{%>
+                    <tr>
+                        <td scope="row"> <span class="fa fa-exchange mr-1"></span> <%=post.post.title%>&nbsp;sold <small style="font-size: 70%;">(<%=post.quantity%>kg)</small></td>
+                        <td><span class="fa fa-cc-mastercard"></span></td>
+                        <td class="text-muted"><%=(post.orderedAt).toLocaleString()%></td>
+                        <td class="d-flex justify-content-end align-items-center"> <span class="fa fa-long-arrow-down mr-1"></span>&#8377;&nbsp;<%=(post.totalPrice).toFixed(2)%> </td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <%}%>
+</body>
+
+</html>
+

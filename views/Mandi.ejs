@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+  <title>Mandi</title>
+  <style>
+        
+    header
+    {
+        background-color:#143D59 ;
+        border-bottom: 2px ridge#143D59 ;
+        margin-bottom:20px;
+        padding-top:5px;
+    }
+    header h1
+    {
+        color: rgb(7, 170, 7);
+        font-family: 'Dancing Script', cursive;
+      
+
+    }
+    .logo
+    {
+        border-radius: 5px;
+        border-bottom: 2px ridge white;
+        width:23vw;
+        height:12vh;
+    }
+    .btn
+   {
+    /*background-color: rgb(7, 170, 7) !important;*/
+    color:White !important;
+    margin: 5px;
+   }
+   #panel
+   {
+       border:2px ridge  white;
+   }
+   #panelHeader
+   {
+       background-color: #143D59;
+       color:white;
+       margin-bottom:2px;
+   }
+   a{
+     display: inline;
+   }
+</style>
+</head>
+<body>
+  <div id="addModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="content">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Item</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/farmer/uploadpost" method="POST" enctype="multipart/form-data">
+            <div class="form-group row">
+              <label class="col-12 col-md-3 col-form-label">Item Name :</label>
+
+              <div class="col-12 col-md-6">
+                <input type="text" class="form-control" name="item_name" placeholder="Enter item name"/>
+              </div>
+
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-md-3 col-form-label">Item Category :</label>
+
+              <div class="col-12 col-md-6">
+                <select class="form-control" name="category">
+                  <option selected>Select Category</option>
+                  <option value="Vegetable">Vegetable</option>
+                  <option value="Fruits">Fruits</option>
+                  <option value="Grains">Grains</option>
+                  <option value="Pulses">Pulses</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-md-3 col-form-label">  Item Price :</label>
+
+                <div class="col-12 col-md-6">
+                  <input type="number" class="form-control" placeholder="Enter item price" name="price"/>
+                </div>
+
+            </div>
+               
+            <div class="form-group row">
+                <label class="col-12 col-md-3 col-form-label">Item Quantity :</label>
+
+                <div class="col-12 col-md-6">
+                  <input type="number" class="form-control" placeholder="Enter item quantity" name="quantity"/>
+                </div>
+
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-md-3 col-form-label">Item Image :</label>
+
+              <div class="col-12 col-md-6">
+                <input type="file" class="form-control" placeholder="Enter item quantity" name="image"/>
+              </div>
+
+          </div>
+            <div class="form-group row offset-3">
+              <button type="submit" class="btn btn-secondary btn-sm">Add Item</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="content">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Item</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            
+            <div class="form-group row">
+              <label class="col-12 col-md-3 col-form-label">Item Name :</label>
+
+              <div class="col-12 col-md-6">
+                <input type="text" class="form-control" placeholder="Enter item name"/>
+              </div>
+
+            </div>
+            <div class="form-group row">
+              <label class="col-12 col-md-3 col-form-label">Item Category :</label>
+
+              <div class="col-12 col-md-6">
+                <select class="form-control">
+                  <option selected>Select Category</option>
+                  <option value="Vegetable">Vegetable</option>
+                  <option value="Fruits">Fruits</option>
+                  <option value="Grains">Grains</option>
+                  <option value="Pulses">Pulses</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-md-3 col-form-label">Item Price :</label>
+
+                <div class="col-12 col-md-6">
+                  <input type="text" class="form-control" placeholder="Enter item price"/>
+                </div>
+
+            </div>
+               
+            <div class="form-group row">
+                <label class="col-12 col-md-3 col-form-label">Item Quantity :</label>
+
+                <div class="col-12 col-md-6">
+                  <input type="text" class="form-control" placeholder="Enter item quantity"/>
+                </div>
+
+            </div>
+            
+            <div class="form-group row offset-3">
+              <button type="button" class="btn btn-secondary btn-sm " data-dismiss="modal" > Edit Item</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+  <div class="container-fluid">
+    
+    <div class="row" >
+      <div class="col-12 col-sm-6">
+        <div class="row">
+            <div class="col-12 col-sm-3" >
+                <img  class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+            </div>
+            
+                <div class="col-12 col-sm-9" >
+                    <h1>FarmBee</h1>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 style="color:white;  font-family: 'Dancing Script', cursive;">Mandi</h2>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+        <div class="col-12 col-sm-6  ">
+          
+          <a  class="btn btn-large bg-danger ">Home <i class="fa fa-home" aria-hidden="true"></i></a>
+          <a  class="btn btn-large bg-warning ">chart <i class="fa fa-line-chart" aria-hidden="true"></i></a>
+          <form action="/farmer/logout" method="post"><button type="submit" class="btn btn-large bg-primary">Logout <i class="fa fa-sign-out"></i></button></form>
+          <a data-toggle="modal" data-target="#addModal" class="bg-primary btn btn-large bg-success ">Add <i class="fa fa-plus"></i></a>
+      </div>
+    </div>
+    </header>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>Item</th>
+              <th>Category</th>
+              <th>Item Name</th>
+              <th>Item Quantity</th>
+              <th>Item Price</th>
+              <th>Update Item</th>
+              <th>Remove Item</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <%for(let items in result){%>
+              <th><img  class="logo" style="max-width:6vw ;" class="img-fluid" src="/<%=items.image%>"></th>
+              <td><%= items.category %> </td>
+              <td><%= items.title%></td>
+              <td><%= items.quantity%></td>
+              <td><i class="fa fa-inr" aria-hidden="true"></i> <b><%= items.price%> </b></td>
+              <td><a data-toggle="modal" data-target="#editModal"  class="btn btn-large bg-success"> <i class="fa fa-pencil-square-o"></i></a></td>
+              <td><a  class="btn btn-large bg-primary"> <i class="fa fa-trash"></i></a></td>
+            <%}%>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+<script src="../jquery/dist/jquery.slim.min.js"></script>
+<script src="../popper.js/dist/umd/popper.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Google font -->
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <title>
+        <%= title%>
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        header {
+            background-color: #143D59;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+
+        header h1 {
+            color: rgb(7, 170, 7);
+            /* font-family: 'Dancing Script', cursive; */
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        h3 {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .logo {
+            border-radius: 5px;
+            border-bottom: 2px ridge white;
+            width: 23vw;
+            height: 12vh;
+        }
+
+        .btn {
+            /*background-color: rgb(7, 170, 7) !important;*/
+            color: White !important;
+            margin: 5px;
+        }
+
+        img {
+            border-radius: 20px;
+            height: 250px;
+        }
+
+        .title {
+            font-size: 18px;
+        }
+
+        .category,
+        .price,
+        .quantity {
+            font-size: 15px;
+        }
+
+        #success:hover {
+            color: #7de762c7 !important;
+            transition:  color 0.3s;
+            /* transform: scale(1.5); */
+        }
+
+        #danger:hover {
+            color: #ff3535 !important;
+            transition: color 0.3s;
+        }
+
+        #cardHover {
+            transform: scale(1.0);
+            transition: transform 0.5s;
+        }
+
+        #cardHover:hover {
+            transform: scale(1.034);
+            transition: transform 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="row">
+                        <div class="col-12 col-sm-3">
+                            <img class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+                        </div>
+
+                        <div class="col-12 col-sm-9">
+                            <h1>FarmBee</h1>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Mandi</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <ul>
+                        <li class="list-inline-item" style="margin-left: -4rem;">
+                            <a id="success" href="/home"
+                                style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+                        </li>
+                        <%if(authenticated.role==="farmer" && authenticated.kyc){%>
+                        <li class="list-inline-item">
+                            <a id="success" href="/farmer/uploadpost"
+                                style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Add crop</a>
+                        </li>
+                        <%}%>
+                        <%if(authenticated.role==="buyer"){%>
+                        <li class="list-inline-item">
+                            <a id="success" href="/buyer/orders"
+                                style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your orders</a>
+                        </li>       
+                        <%}%> 
+                        <li class="list-inline-item">
+                            <a id="success" href="#"
+                                style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+                        </li>
+                        <%if(authenticated.role==="farmer" && authenticated.kyc){%>
+                        <li class="list-inline-item">
+                            <a id="success" href="/farmer/getposts"
+                                style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your crops</a>
+                        </li>
+                        <%}%>     
+                        <li class="list-inline-item">
+                            <form action="/<%=authenticated.role%>/logout" method="post"><button id="danger"
+                                    style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer;">Logout</button>
+                            </form>
+                        </li>
+                        <li class="list-inline-item mt-4" style="margin-left: 1rem;">
+                            <form class="form-inline" action="/<%=authenticated.role%>/storecrops" method="GET">
+                                <input class="form-control mr-sm-2" type="search" placeholder="search for crop, category"
+                                    aria-label="Search" name="search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </header>
+
+    <div class="container-fluid" id="category" style="background-color:#fafafa;">
+        <div class="row pb-5 mb-4">
+            <%if(!searched){%>
+                <%if(result.length>0){%>
+                    <%for(let item of result) {%>
+                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 mt-2">
+                            <div id="cardHover" class="card rounded shadow-sm border-0">
+                                <div class="card-body p-4"><img src="/<%=item.image%>"
+                                        class="img-fluid d-block mx-auto mb-3">
+                                    <p class="text-center title"><b>
+                                            <%=item.title%>
+                                        </b></p>
+                                    <u></u>
+                                    <p class="small text-muted text-center category"><i class="fa fa-tag"
+                                            aria-hidden="true"></i>&nbsp;<%=item.category%>
+                                    </p>
+                                    <p class="small text-muted text-center quantity"><i class="fa fa-shopping-basket"
+                                            aria-hidden="true"></i>
+                                        &nbsp;<%=item.quantity%>kg</p>
+                                    <p class="small text-muted text-center price"><i class="fa fa-inr">
+                                        </i>&nbsp;<%=item.price%>/kg</p>
+                                    <%if(authenticated && authenticated.role==='farmer' ){%>
+                                        <a href="/<%=authenticated.role%>/getinfo/<%=item._id%>"
+                                            class="btn btn-success align-content-center"
+                                            style="margin-left: 3rem; padding-right: 4rem; padding-left: 4rem;">Info</a>
+                                        <%}%>
+                                            <%if(authenticated){%>
+                                                <%if(authenticated.role==='buyer'){%>
+                                                    <form action="/buyer/payment/<%=item._id%>" method="POST"><button
+                                                            type="submit"
+                                                            class="btn btn-success align-content-center pl-4 pr-4 mr-2">Buy</button>
+                                                        <input style=" padding: 2px 3px 5px 3px;" type="number" min="1"
+                                                            max="50" value="1" oninput="validity.valid||(value='');"
+                                                            name="shop_quantity" pattern="[0-9]+"><a
+                                                            href="/<%=authenticated.role%>/getinfo/<%=item._id%>"
+                                                            class="btn btn-success align-content-center float-right pl-4 pr-4">Info</a>
+                                                        <%}%>
+                                                    </form>
+                                                    <%} else {%><a href="/buyer/signin"
+                                                            class="btn btn-success align-content-center pl-4 pr-4">Login</a>
+                                                        <%}%>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                            <%} else {%>
+                                <h1 class="text-danger">There is no items found!!</h1>
+                                <%}%>
+                                    <%} else {%>
+
+                                        <%if(posts.length>0){%>
+                                            <%for(let item of posts) {%>
+                                                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 mt-2">
+                                                    <div class="card rounded shadow-sm border-0">
+                                                        <div class="card-body p-4"><img src="/<%=item.image%>"
+                                                                class="img-fluid d-block mx-auto mb-3">
+                                                            <p class="text-center title"><b>
+                                                                    <%=item.title%>
+                                                                </b></p>
+                                                            <u></u>
+                                                            <p class="small text-muted text-center category"><i
+                                                                    class="fa fa-tag" aria-hidden="true"></i>&nbsp;
+                                                                <%=item.category%>
+                                                            </p>
+                                                            <p class="small text-muted text-center quantity"><i
+                                                                    class="fa fa-shopping-basket"
+                                                                    aria-hidden="true"></i>
+                                                                &nbsp;<%=item.quantity%>kg</p>
+                                                            <p class="small text-muted text-center price"><i
+                                                                    class="fa fa-inr">
+                                                                </i>&nbsp;<%=item.price%>/kg</p>
+                                                            <%if(authenticated && authenticated.role==='farmer' ){%>
+                                                                <a href="/<%=authenticated.role%>/getinfo/<%=item._id%>"
+                                                                    class="btn btn-success align-content-center"
+                                                                    style="margin-left: 3rem; padding-right: 4rem; padding-left: 4rem;">Info</a>
+                                                                <%}%>
+                                                                    <%if(authenticated){%>
+                                                                        <%if(authenticated.role==='buyer'){%>
+                                                                            <form action="/buyer/payment/<%=item._id%>"
+                                                                                method="post"><button type="submit"
+                                                                                    class="btn btn-success align-content-center pl-4 pr-4 mr-2">Buy</button>
+                                                                                <input
+                                                                                    style=" padding: 2px 3px 5px 3px;"
+                                                                                    type="number" min="1" max="50"
+                                                                                    value="1"
+                                                                                    oninput="validity.valid||(value='');"
+                                                                                    name="shop_quantity"
+                                                                                    pattern="[0-9]+"><a
+                                                                                    href="/<%=authenticated.role%>/getinfo/<%=item._id%>"
+                                                                                    class="btn btn-success align-content-center float-right pl-4 pr-4">Info</a>
+                                                                                <%}%>
+                                                                            </form>
+                                                                            <%} else {%><a href="/buyer/signin"
+                                                                                    class="btn btn-success align-content-center pl-4 pr-4">Login</a>
+                                                                                <%}%>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <%} else {%>
+                                                        <h1 class="text-danger">There is no items found!!</h1>
+                                                        <%}%>
+                                                            <%}%>
+        </div>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+        <script src="../jquery/dist/jquery.slim.min.js"></script>
+        <script src="../popper.js/dist/umd/popper.min.js"></script>
+        <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+  <!-- Google font -->
+  <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+  <title><%=title%></title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    header
+    {
+        background-color:#143D59 ;
+        border-bottom: 2px ridge#143D59 ;
+        margin-bottom:20px;
+        padding-top:5px;
+    }
+    header h1
+    {
+        color: rgb(7, 170, 7);
+        /* font-family: 'Dancing Script', cursive; */
+    }
+    .logo
+    {
+        border-radius: 5px;
+        border-bottom: 2px ridge white;
+        width:23vw;
+        height:12vh;
+    }
+    .btn
+   {
+    color:White !important;
+    margin: 5px;
+   }
+   #panel
+   {
+       border:2px ridge  white;
+   }
+   #panelHeader
+   {
+       background-color: #143D59;
+       color:white;
+       margin-bottom:2px;
+   }
+   a{
+     display: inline;
+     font-size: 16px;
+   }
+
+   #success:hover{
+  color: #7de762c7 !important;
+  transition: color 0.3s ;
+  }
+  #danger:hover{
+  color: #ff3535 !important;
+  transition: color 0.3s;
+  }
+
+</style>
+</head>
+<body>
+  <header>
+  <div class="container-fluid">
+    
+    <div class="row" >
+      <div class="col-12 col-sm-6">
+        <div class="row">
+            <div class="col-12 col-sm-3" >
+                <img  class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+            </div>
+            
+                <div class="col-12 col-sm-9" >
+                    <h1>FarmBee</h1>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;"><%=title%></h2>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+        <div class="col-12 col-sm-6">
+          <ul>
+            <li class="list-inline-item" style="margin-left: -3rem;">
+              <a id="success" href="/home" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+            </li>
+            <%if(authenticated.kyc){%>
+            <li class="list-inline-item">
+              <a id="success" href="/farmer/uploadpost" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Add Crop</a>
+            </li>
+            <%}%>
+            <li class="list-inline-item">
+              <a id="success" href="#" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+            </li>
+            <li class="list-inline-item">
+              <a id="success" href="/farmer/getstore" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Mandi</a>
+            </li>
+            <li class="list-inline-item">
+              <form action="/farmer/logout" method="post"><button id="danger" style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer;">Logout</button></form>
+            </li>
+            <li class="list-inline-item mt-4" style="margin-left: 1rem;">
+              <form class="form-inline" action="/farmer/crops" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="search for crops,category" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </li>
+          </ul>
+      </div>
+      </div>
+    </div>
+    </header>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class="thead-light">
+            <tr>
+              <th>Crop</th>
+              <th>Crop's Name</th>
+              <th>Crop's type</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Delete crop</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%if(!searched){%>
+            <%if(result.length>0){%>
+            <%for(let items of result){%>
+            <tr>
+              <th><img  class="logo" style="max-width:6vw ;" class="img-fluid" src="/<%=items.image%>"></th>
+              <td><%= items.title%></td>
+              <td><%= items.category %> </td>
+              <td><%= items.quantity%><%=items.quantity>1? " kgs":" kg"%></td>
+              <td>&#8377;&nbsp;<%= items.price%>/kg</td>
+              <td><form action="/farmer/removepost" method="POST" ><input type="hidden" value="<%=items._id%>" name="postId">
+                <button type="submit" class="btn btn-large bg-danger"> <i class="fa fa-trash"></i></button></form></td>
+            </tr> 
+            <%}%>
+            <%} else {%>
+                <h1>No data found!!</h1>
+                <%}%>
+            <%} else{%>
+              <%if(posts.length>0){%>
+                <%for(let items of posts){%>
+                <tr>
+                  <th><img  class="logo" style="max-width:6vw ;" class="img-fluid" src="/<%=items.image%>"></th>
+                  <td><%= items.title%></td>
+                  <td><%= items.category %> </td>
+                  <td><%= items.quantity%><%=items.quantity>1? " kgs":" kg"%></td>
+                  <td>&#8377;&nbsp;<%= items.price%>/kg</td>
+                  <td><form action="/farmer/removepost" method="POST"><input type="hidden" value="<%=items._id%>" name="postId">
+                    <button type="submit" class="btn btn-large bg-danger"> <i class="fa fa-trash"></i></button></form></td>
+                </tr> 
+                <%}%>
+                <%} else {%>
+                    <h1>No data found!!</h1>
+                    <%}%>
+                <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+<script src="../jquery/dist/jquery.slim.min.js"></script>
+<script src="../popper.js/dist/umd/popper.min.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

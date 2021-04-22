@@ -1,0 +1,29 @@
+const mongoose=require('mongoose');
+const farmerSchema=new mongoose.Schema({
+    username:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    address:{
+        type:String,
+        required:true
+    },
+    role:{
+        type:String,
+        required:true
+    },
+    kyc:{
+        adhaar:String,
+    },
+    resetToken:String,
+    resetTokenExpiration:Date,
+})
+module.exports=mongoose.model('farmer',farmerSchema)

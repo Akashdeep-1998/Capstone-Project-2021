@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"); */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+      header {
+            background-color: #143D59;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+        .logo {
+            border-radius: 5px;
+            border-bottom: 2px ridge white;
+            width: 23vw;
+            height: 12vh;
+        }
+        header h1 {
+            color: rgb(7, 170, 7);
+            /* font-family: 'Dancing Script', cursive; */
+            font-family: 'Times New Roman', Times, serif;
+        }
+      body {
+        background: #7e8d8d;
+      }
+      .wrapper {
+        max-width: 500px;
+        width: 100%;
+        background: #fff;
+        margin: 50px auto;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+        padding: 30px;
+      }
+
+      .wrapper .title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color:  #26648d;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .wrapper .form {
+        width: 100%;
+      }
+
+      .wrapper .form .inputfield {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .wrapper .form .inputfield label {
+        width: 200px;
+        color: #757575;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+
+      .wrapper .form .inputfield .input,
+      .wrapper .form .inputfield .textarea {
+        width: 100%;
+        outline: none;
+        border: 1px solid #d5dbd9;
+        font-size: 15px;
+        padding: 8px 10px;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+
+      .wrapper .form .inputfield .textarea {
+        width: 100%;
+        height: 125px;
+        resize: none;
+      }
+
+      .wrapper .form .inputfield .custom_select {
+        position: relative;
+        width: 100%;
+        height: 37px;
+      }
+
+      .wrapper .form .inputfield .custom_select:before {
+        content: "";
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        border: 8px solid;
+        border-color: #d5dbd9 transparent transparent transparent;
+        pointer-events: none;
+      }
+
+      .wrapper .form .inputfield .custom_select select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        border: 0px;
+        padding: 8px 10px;
+        font-size: 15px;
+        border: 1px solid #d5dbd9;
+        border-radius: 3px;
+      }
+
+      .wrapper .form .inputfield .input:focus,
+      .wrapper .form .inputfield .textarea:focus,
+      .wrapper .form .inputfield .custom_select select:focus {
+        border: 1px solid #00ff6a;
+      }
+
+      .wrapper .form .inputfield p {
+        font-size: 14px;
+        color: #757575;
+      }
+
+      .wrapper .form .inputfield .btn {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 15px;
+        border: 0px;
+        background: #07e437;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .wrapper .form .inputfield .btn:hover {
+        background-color:  #11cc3f;
+        transition: background-color 0.5s;
+      }
+
+      .wrapper .form .inputfield:last-child {
+        margin-bottom: 0;
+      }
+	  .user-message{
+		  margin: 2rem auto 2rem auto !important; 
+		  width: 37%;
+		  padding: 0.5rem;
+		  border-radius: 3px;
+		  text-align: center;
+		  border: 1px solid rgb(4, 189, 4);
+		  background: rgba(138, 245, 128, 0.644);
+	  }
+
+	  .user-message-error{
+		  border-color: red;
+          background: rgb(247, 190, 190);
+		  color: red;
+	  }
+    #success:hover{
+  color: #7de762c7 !important;
+  transition: color 0.3s ;
+  }
+  #danger:hover{
+  color: #ff3535 !important;
+  transition: color 0.3s;
+  }
+      @media (max-width: 420px) {
+        .wrapper .form .inputfield {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .wrapper .form .inputfield label {
+          margin-bottom: 5px;
+        }
+        .wrapper .form .inputfield.terms {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid">
+        
+        <div class="row" >
+          <div class="col-12 col-sm-6">
+            <div class="row">
+                <div class="col-12 col-sm-3" >
+                    <img  class="logo" style="max-width:6vw ;" class="img-fluid" src="../logo.jpeg">
+                </div>
+                
+                    <div class="col-12 col-sm-9" >
+                        <h1>FarmBee</h1>
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 style="color:white; font-family: 'Times New Roman', Times, serif ;">Transactions</h2>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+            <div class="col-12 col-sm-6">
+              <ul style="margin-top: 2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 17px;">
+                <li class="list-inline-item" style="margin-left: 15rem;">
+                  <a id="success" href="/home" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Home</a>
+                </li>
+                <li class="list-inline-item">
+                  <a id="success" href="/farmer/getposts" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Your crops</a>
+                </li>
+                <li class="list-inline-item">
+                  <a id="success" href="#" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Chart</a>
+                </li>
+                <li class="list-inline-item">
+                  <a id="success" href="/farmer/getstore" style="color:#e9e5e5; text-decoration: none;margin-right: 1rem;">Mandi</a>
+                </li>
+                <li class="list-inline-item">
+                  <form action="/farmer/logout" method="post"><button id="danger" style="color:#e9e5e5; text-decoration: none;background: none; border: none; padding: 0; outline: 0; cursor: pointer;">Logout</button></form>
+                </li>
+              </ul>
+          </div>
+          </div>
+        </div>
+        </header>
+    <%if(errorMessage){%>
+        <div class="user-message user-message-error"><%=errorMessage%></div>
+        <%}%>
+    <div class="wrapper">
+      <div class="title">upload your crop's details here</div>
+      <div class="form">
+        <form
+          action="/farmer/uploadpost"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="inputfield">
+            <label class="text-uppercase mr-0" style="font-weight: 600;">Crop's Name</label>
+            <input
+              type="text"
+              class="input"
+              name="item_name"
+              placeholder="Enter crop's name"
+            />
+          </div>
+          <div class="inputfield">
+            <label class="text-uppercase mr-0" style="font-weight: 600;">Crop's Type</label>
+            <input
+              type="text"
+              class="input"
+              name="category"
+              placeholder="Enter the type of crop"
+            />
+          </div>
+          <div class="inputfield">
+            <label class="text-uppercase mr-0" style="font-weight: 600;">Price</label>
+            <input
+              type="number"
+              class="input"
+              name="price"
+              placeholder="Enter the price"
+            />
+          </div>
+          <div class="inputfield">
+            <label class="text-uppercase mr-0" style="font-weight: 600;">Quantity</label>
+            <input
+              type="text"
+              class="input"
+              name="quantity"
+              placeholder="Enter the quantity"
+            />
+          </div>
+          <div class="inputfield">
+            <label class="text-uppercase mr-0" style="font-weight: 600;">Crop's Image</label>
+            <input
+              type="file"
+              class="input"
+              placeholder="Enter item quantity"
+              name="image"
+            />
+          </div>
+          <div class="inputfield">
+            <input type="submit" value="Upload" class="btn">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
